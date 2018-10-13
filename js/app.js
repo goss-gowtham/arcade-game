@@ -39,7 +39,7 @@ class Hero{
   constructor(){
     this.width = 101;    //got from for loop of drawImage()
     this.height = 83;    //width - left/right, height - up/down moves
-    this.sprite = 'images/char-boy.png';
+    this.sprite = 'images/rock.png';
     this.startX = this.width * 2;
     this.startY = (this.height *4)+60;
     this.x = this.startX;
@@ -48,15 +48,17 @@ class Hero{
   update(){
     for(let enemy of allEnemies){
       if(this.y == enemy.y && (enemy.x + this.width/3 > this.x && enemy.x < this.x + this.width/3)){
-          alert("Game Over");
-          this.reset();
+          alert("Oh God! You killed the bug");
+          this.x = this.startX;
+          this.y = this.startY;
       }
     }
     if (this.y < 0) {
-        setTimeout(function () {
-            this.x = 101;
-            this.y = 83;
-        }, 600);
+        setTimeout(() => {  //timout function is used from ES6 specs
+            this.x = this.startX;
+            this.y = this.startY;
+            alert("You win! All bugs are safe now");
+        }, 5);    //set very 5ms to enable user to play again faster
       }
   }
   render(){
@@ -64,35 +66,31 @@ class Hero{
   }
   handleInput(input){
     if(input == 'left' && this.x > 0){
-        this.x -= this.width;
+        this.x -= this.width;     //moves player from one box to other box left with width measure
     }
     else if(input == 'right' && this.x < this.width*4){
-        this.x += this.width;
+        this.x += this.width;   //moves to right
     }
     else if(input == 'up' && this.y > 0){
-        this.y -= this.height;
+        this.y -= this.height;    //moves to up
     }
     else if(input == 'down' && this.y < this.height*4){
-        this.y += this.height;
+        this.y += this.height;    //moves to down
     }
-  }
-  reset(){
-    this.x = this.startX;
-    this.y = this.startY;
   }
 }
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-const player = new Hero();
+const player = new Hero();    //instantiating Hero object
 random = Math.floor(Math.random() * 300)
 const bug = new Enemy(-101,0,90 +  Math.floor(Math.random() * 300));
 const bug1 = new Enemy(-201,0,90 +  Math.floor(Math.random() * 300));
 const bug2 = new Enemy(-81,83,110 + random);
 const bug3 = new Enemy(201,83,110 + random);
-const allEnemies = [];
-allEnemies.push(bug,bug1,bug2,bug3);
+const allEnemies = [];    //allEnemies defined
+allEnemies.push(bug,bug1,bug2,bug3);    //adding bugs to arrays by push()
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

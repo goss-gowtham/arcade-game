@@ -44,7 +44,7 @@ class Hero
   {
     this.width = 101; //got from for loop of drawImage()
     this.height = 83; //width - left/right, height - up/down moves
-    this.sprite = 'images/rock.png';
+    this.sprite = 'images/char-boy.png';
     this.startX = this.width * 2;
     this.startY = (this.height * 4) + 60;
     this.x = this.startX;
